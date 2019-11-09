@@ -19,7 +19,7 @@ from sklearn.metrics import recall_score
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn import preprocessing 
 
-renfedata = pd.read_csv("C:\\Users\\Chris\\Desktop\\renfe.csv")
+renfedata = pd.read_csv("input/renfe.csv")
 
 #add in population
 
