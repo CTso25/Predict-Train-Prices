@@ -27,7 +27,7 @@ renfedata = pd.read_csv("input/renfe.csv")
 
 renfedata.origin.unique()
 renfedata.destination.unique()
-renfedata.destinationpop.unique()
+#renfedata.destinationpop.unique()
 #Madrid Population 2018 - 6.55 million
 #Barcelona Population 2018 - 5.515 million
 #Sevilla Populaiton 2018 - 1.945 million
