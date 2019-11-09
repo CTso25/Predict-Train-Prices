@@ -27,12 +27,21 @@ renfedata = pd.read_csv("input/renfe.csv")
 
 renfedata.origin.unique()
 renfedata.destination.unique()
+
 #renfedata.destinationpop.unique()
 #Madrid Population 2018 - 6.55 million
 #Barcelona Population 2018 - 5.515 million
 #Sevilla Populaiton 2018 - 1.945 million
 #Valencia Population 2018 - 2.531 million
 #Ponferrada Population 2018 - 65,239 
+
+#process dates
+renfedata['insert_date'] = pd.to_datetime(renfedata['insert_date'])
+renfedata['start_date'] = pd.to_datetime(renfedata['start_date'])
+renfedata['end_date'] = pd.to_datetime(renfedata['end_date'])
+
+renfedata['travel_mins'] = renfedata['end_date'] - renfedata['start_date']
+renfedata['travel_mins'] = renfedata['travel_mins']/np.timedelta64(1,'m')
 
 #set new columns
 renfedata['originpop'] = 0
@@ -102,11 +111,32 @@ def distmeasure(data):
         return 338
     elif data['destination'] == 'PONDERRADA' and data['origin'] == 'MADRID':  
         return 338
-
-
+#    elif data['destination'] == 'BARCELONA' and data['origin'] == 'SEVILLA':  
+#        return 829
+#    elif data['destination'] == 'SEVILLA' and data['origin'] == 'BARCELONA':
+#        return 829    
+#    elif data['destination'] == 'BARCELONA' and data['origin'] == 'VALENCIA':  
+#        return 303
+#    elif data['destination'] == 'VALENCIA' and data['origin'] == 'BARCELONA':
+#        return 303    
+#    elif data['destination'] == 'BARCELONA' and data['origin'] == 'PONFERRADA':  
+#        return 737
+#    elif data['destination'] == 'PONFERRADA' and data['origin'] == 'BARCELONA':
+#        return 737  
+#    elif data['destination'] == 'SEVILLA' and data['origin'] == 'VALENCIA':  
+#        return 539
+#    elif data['destination'] == 'VALENCIA' and data['origin'] == 'SEVILLA':
+#        return 539
+#    elif data['destination'] == 'SEVILLA' and data['origin'] == 'PONFERRADA':
+#        return 728
+#    elif data['destination'] == 'PONFERRADA' and data['origin'] == 'SEVILLA':
+#        return 728
+#    elif data['destination'] == 'VALENCIA' and data['origin'] == 'PONFERRADA':
+#        return 641
+#    elif data['destination'] == 'PONFERRADA' and data['origin'] == 'VALENCIA':
+#        return 641
+        
 renfedata['distance'] = renfedata.apply(distmeasure, axis = 1)
-
-print (len(renfedata))
 
 
 
