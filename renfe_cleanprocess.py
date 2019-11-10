@@ -10,6 +10,7 @@ Created on Sat Nov  9 18:53:16 2019
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn import tree
@@ -23,7 +24,7 @@ from sklearn.preprocessing import OneHotEncoder
 
 renfedata = pd.read_csv("input/renfe.csv")
 
-# drop nan values
+# drop nan values to reduce processing time
 renfedata = renfedata.dropna()
 
 # add in population
@@ -96,7 +97,7 @@ renfedata['destinationpop'] = renfedata.apply(destpop, axis=1)
 # 728 km from Sevilla to Ponferrada
 # 641 km from Valencia to Ponferrada
 
-# check unique routs
+# check unique routes
 renfe_unique_o_d = renfedata.groupby(['origin', 'destination']).size().reset_index(name='Freq')
 print(renfe_unique_o_d)
 
@@ -146,3 +147,65 @@ def distmeasure(data):
 
 
 renfedata['distance'] = renfedata.apply(distmeasure, axis=1)
+
+# convert start_date to month, date, day of the week, hour, minute
+renfedata['month'] = renfedata['start_date'].dt.month
+renfedata['date'] = renfedata['start_date'].dt.day
+renfedata['dotw'] = renfedata['start_date'].dt.day_name
+renfedata['hour'] = renfedata['start_date'].dt.hour
+renfedata['minute'] = renfedata['start_date'].dt.minute
+
+
+# helper function to determine if train is "overnight", or ends on different day than it starts
+def isOvernight(data):
+    if pd.to_datetime(data['start_date']).day != pd.to_datetime(data['end_date']).day:
+        return 1
+    else:
+        return 0
+
+
+renfedata['is_overnight'] = renfedata.apply(isOvernight, axis=1)
+
+
+# consolidate the fare type into the
+def fareType(data):
+    if data['fare']=='Promo':
+        return 'Promo'
+    elif data['fare']=='Flexible':
+        return 'Flexible'
+    elif data['fare']== 'Adulto ida':
+        return 'Adulto Ida'
+    elif data['fare']=='Promo +':
+        return 'Promo +'
+    elif data['fare']=='Grupos Ida':
+        return 'Grupos Ida'
+    elif data['fare']=='Double Sleeper-Flexible':
+        return 'Flexible'
+    elif data['fare']=='COD.PROMOCIONAL':
+        return 'Promo'
+    elif data['fare']=='Mesa':
+        return 'Table'
+    elif data['fare']=='Individual-Flexible':
+        return 'Individual Sleeper-Flexible'
+    else:
+        return np.nan
+
+
+# consolidate the train classes
+def trainClasses(data):
+    if data['train_class'] == 'TuristaSólo plaza H':
+        return np.nan
+    elif data['train_class'] == 'PreferenteSólo plaza H':
+        return np.nan
+    elif data['train_class'] == 'Turista PlusSólo plaza H':
+        return np.nan
+    else:
+        return data['train_class']
+
+
+renfedata['fare'] = renfedata.apply(fareType, axis=1)
+renfedata['train_class'] = renfedata.apply(trainClasses, axis=1)
+
+renfedata = renfedata.dropna()
+
+renfedata = pd.get_dummies(renfedata, columns=['origin', 'destination', 'day_name', 'train_type', 'fare', 'train_class'])
