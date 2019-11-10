@@ -169,23 +169,23 @@ renfedata['is_overnight'] = renfedata.apply(isOvernight, axis=1)
 
 # consolidate the fare type into the
 def fareType(data):
-    if data['fare']=='Promo':
+    if data['fare'] == 'Promo':
         return 'Promo'
-    elif data['fare']=='Flexible':
+    elif data['fare'] == 'Flexible':
         return 'Flexible'
-    elif data['fare']== 'Adulto ida':
+    elif data['fare'] == 'Adulto ida':
         return 'Adulto Ida'
-    elif data['fare']=='Promo +':
+    elif data['fare'] == 'Promo +':
         return 'Promo +'
-    elif data['fare']=='Grupos Ida':
+    elif data['fare'] == 'Grupos Ida':
         return 'Grupos Ida'
-    elif data['fare']=='Double Sleeper-Flexible':
+    elif data['fare'] == 'Double Sleeper-Flexible':
         return 'Flexible'
-    elif data['fare']=='COD.PROMOCIONAL':
+    elif data['fare'] == 'COD.PROMOCIONAL':
         return 'Promo'
-    elif data['fare']=='Mesa':
+    elif data['fare'] == 'Mesa':
         return 'Table'
-    elif data['fare']=='Individual-Flexible':
+    elif data['fare'] == 'Individual-Flexible':
         return 'Individual Sleeper-Flexible'
     else:
         return np.nan
