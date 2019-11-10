@@ -117,7 +117,7 @@ def distmeasure(data):
         return 302
     elif data['destination'] == 'MADRID' and data['origin'] == 'PONFERRADA':
         return 338
-    elif data['destination'] == 'PONFERRADA' and data['origin'] == 'MADRID':
+    elif data['destination'] == 'PONDERRADA' and data['origin'] == 'MADRID':
         return 338
 #    elif data['destination'] == 'BARCELONA' and data['origin'] == 'SEVILLA':
 #        return 829
