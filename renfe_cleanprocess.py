@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+
 from sklearn import tree
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import precision_score
@@ -120,31 +121,6 @@ def distmeasure(data):
         return 338
     elif data['destination'] == 'PONFERRADA' and data['origin'] == 'MADRID':
         return 338
-#    elif data['destination'] == 'BARCELONA' and data['origin'] == 'SEVILLA':
-#        return 829
-#    elif data['destination'] == 'SEVILLA' and data['origin'] == 'BARCELONA':
-#        return 829
-#    elif data['destination'] == 'BARCELONA' and data['origin'] == 'VALENCIA':
-#        return 303
-#    elif data['destination'] == 'VALENCIA' and data['origin'] == 'BARCELONA':
-#        return 303
-#    elif data['destination'] == 'BARCELONA' and data['origin'] == 'PONFERRADA':
-#        return 737
-#    elif data['destination'] == 'PONFERRADA' and data['origin'] == 'BARCELONA':
-#        return 737
-#    elif data['destination'] == 'SEVILLA' and data['origin'] == 'VALENCIA':
-#        return 539
-#    elif data['destination'] == 'VALENCIA' and data['origin'] == 'SEVILLA':
-#        return 539
-#    elif data['destination'] == 'SEVILLA' and data['origin'] == 'PONFERRADA':
-#        return 728
-#    elif data['destination'] == 'PONFERRADA' and data['origin'] == 'SEVILLA':
-#        return 728
-#    elif data['destination'] == 'VALENCIA' and data['origin'] == 'PONFERRADA':
-#        return 641
-#    elif data['destination'] == 'PONFERRADA' and data['origin'] == 'VALENCIA':
-#        return 641
-
 
 renfedata['distance'] = renfedata.apply(distmeasure, axis=1)
 
@@ -154,7 +130,6 @@ renfedata['date'] = renfedata['start_date'].dt.day
 renfedata['dotw'] = renfedata['start_date'].dt.day_name
 renfedata['hour'] = renfedata['start_date'].dt.hour
 renfedata['minute'] = renfedata['start_date'].dt.minute
-
 
 # helper function to determine if train is "overnight", or ends on different day than it starts
 def isOvernight(data):
