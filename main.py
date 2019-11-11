@@ -26,12 +26,18 @@ for chunk in df_chunk:
 # concat the list into dataframe
 renfe_df= pd.concat(chunk_list)
 
-print("Range: ")
-print("Min: " + renfe_df['start_date'].min())
+# print("Range: ")
+# print("Min: " + renfe_df['start_date'].min())
+#
+# print("Max: " + renfe_df['start_date'].max())
 
-print("Max: " + renfe_df['start_date'].max())
+# ponferrada_routes = renfe_df[(renfe_df['origin'] == 'PONFERRADA') | (renfe_df['destination'] == 'PONFERRADA')]
+# print(ponferrada_routes['start_date'].min())
+# print(ponferrada_routes['start_date'].max())
 
-
-
+sevilla_routes = renfe_df[(renfe_df['origin'] == 'SEVILLA') | (renfe_df['destination'] == 'SEVILLA')]
+print(sevilla_routes['train_type'].unique())
+print(sevilla_routes['train_class'].unique())
+print(sevilla_routes['fare'].unique())
 
 
