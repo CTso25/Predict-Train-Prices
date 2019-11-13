@@ -6,7 +6,7 @@ reader = csv.DictReader(open('datasets/holidays.csv'))
 holidays_dict = {}
 for row in reader:
     for column, value in row.items():
-        result.setdefault(column, []).append(value)
-print(result)
+        holidays_dict.setdefault(column, []).append(value)
+print(holidays_dict)
 
 #
