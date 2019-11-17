@@ -196,15 +196,15 @@ def distmeasure(data):
 renfedata['distance'] = renfedata.apply(distmeasure, axis=1)
 
 # convert start_date to month, date, day of the week, hour, minute
-renfedata['month'] = renfedata['start_date'].dt.month
-renfedata['date'] = renfedata['start_date'].dt.day
-renfedata['dotw'] = renfedata['start_date'].dt.day_name
-renfedata['hour'] = renfedata['start_date'].dt.hour
-renfedata['minute'] = renfedata['start_date'].dt.minute
+renfedata['month'] = pd.to_datetime(renfedata['start_date']).dt.month
+renfedata['date'] = pd.to_datetime(renfedata['start_date']).dt.day
+renfedata['dotw'] = pd.to_datetime(renfedata['start_date']).dt.weekday
+renfedata['hour'] = pd.to_datetime(renfedata['start_date']).dt.hour
+renfedata['minute'] = pd.to_datetime(renfedata['start_date']).dt.minute
 
 # helper function to determine if train is "overnight", or ends on different day than it starts
 def isOvernight(data):
-    if pd.to_datetime(data['start_date']).day != pd.to_datetime(data['end_date']).day:
+    if pd.to_datetime(data['start_date']).dt.day != pd.to_datetime(data['end_date']).dt.day:
         return 1
     else:
         return 0
