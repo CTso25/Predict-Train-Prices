@@ -204,7 +204,7 @@ renfedata['minute'] = pd.to_datetime(renfedata['start_date']).dt.minute
 
 # helper function to determine if train is "overnight", or ends on different day than it starts
 def isOvernight(data):
-    if pd.to_datetime(data['start_date']).dt.day != pd.to_datetime(data['end_date']).dt.day:
+    if pd.to_datetime(data['start_date']).day != pd.to_datetime(data['end_date']).day:
         return 1
     else:
         return 0
