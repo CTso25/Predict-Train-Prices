@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Nov  9 18:53:16 2019
 
-@author: Chris
-"""
 
 # import things
 
@@ -256,6 +251,9 @@ def trainClasses(data):
 
 renfedata['fare'] = renfedata.apply(fareType, axis=1)
 renfedata['train_class'] = renfedata.apply(trainClasses, axis=1)
+
+# Add column for to compute diff in days away from trip as of scrape date
+renfedata['days_to_trip'] = (renfedata['start_date'].dt.date - renfedata['insert_date'].dt.date).dt.days
 
 renfedata = renfedata.dropna()
 
