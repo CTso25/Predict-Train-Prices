@@ -15,7 +15,7 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn import preprocessing
 from sklearn.preprocessing import OneHotEncoder
 
-renfe_clean_data = pd.read_csv("input/cleaned_data.csv")
+renfe_nccd = pd.read_csv("input/not_encoded_clean_data.csv")
 
 # print(list(renfe_clean_data.columns.values))
 # plt.plot()

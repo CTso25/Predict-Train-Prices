@@ -256,6 +256,8 @@ renfedata['days_to_trip'] = (renfedata['start_date'].dt.date - renfedata['insert
 
 renfedata = renfedata.dropna()
 
+renfedata.to_csv("input/not_encoded_clean_data.csv")
+
 renfedata = pd.get_dummies(renfedata, columns=['origin', 'destination', 'dotw', 'train_type', 'fare', 'train_class'])
 
 renfedata.to_csv("input/cleaned_data.csv")
