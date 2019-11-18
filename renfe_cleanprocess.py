@@ -248,8 +248,17 @@ def trainClasses(data):
         return data['train_class']
 
 
+# remove negative days to trips
+def daystoTrip(data):
+    if data['days_to_trip'] < 0:
+        return np.nan
+    else:
+        return data['days_to_trip']
+
+
 renfedata['fare'] = renfedata.apply(fareType, axis=1)
 renfedata['train_class'] = renfedata.apply(trainClasses, axis=1)
+renfedata['days_to_trip'] = renfedata.apply(daystoTrip, axis=1)
 
 # Add column for to compute diff in days away from trip as of scrape date
 renfedata['days_to_trip'] = (renfedata['start_date'].dt.date - renfedata['insert_date'].dt.date).dt.days
