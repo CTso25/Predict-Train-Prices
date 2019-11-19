@@ -16,6 +16,9 @@ from sklearn import preprocessing
 from sklearn.preprocessing import OneHotEncoder
 
 renfe_nccd = pd.read_csv("input/not_encoded_clean_data.csv")
+renfe_clean = pd.read_csv("input/cleaned_data.csv")
+renfe_cleaned = renfe_clean.drop(columns = ['Unnamed: 0', 'insert_date', 'start_date', 'end_date'])
+renfe_cleaned = renfe_cleaned[renfe_cleaned.columns.values].astype(float)
 
 # is overnight
 fig,ax = plt.subplots(figsize=(20,6))
@@ -118,6 +121,8 @@ ax = sns.boxplot(x='days_to_trip', y='price', data=renfe_nccd)
 plt.show()
 
 # correlation plot
-f,ax = plt.subplots(figsize=(20, 20))
-sns.heatmap(renfe_nccd, annot=False, cmap = "Blues", linewidths=.5, fmt='.2f', ax=ax)
+
+f,ax = plt.subplots(figsize=(30, 30))
+sns.heatmap(renfe_cleaned.corr(), annot=False, cmap="Blues", linewidths=.5, fmt='.2f', ax=ax)
 plt.show()
+
