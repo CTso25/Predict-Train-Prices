@@ -169,8 +169,8 @@ renfedata['days_from_holiday'] = renfedata.apply(computeDaysFromHoliday, axis=1)
 # 641 km from Valencia to Ponferrada
 
 # check unique routes
-renfe_unique_o_d = renfedata.groupby(['origin', 'destination']).size().reset_index(name='Freq')
-print(renfe_unique_o_d)
+# renfe_unique_o_d = renfedata.groupby(['origin', 'destination']).size().reset_index(name='Freq')
+# print(renfe_unique_o_d)
 
 
 # helper function for distances between cities
@@ -258,10 +258,10 @@ def daystoTrip(data):
 
 renfedata['fare'] = renfedata.apply(fareType, axis=1)
 renfedata['train_class'] = renfedata.apply(trainClasses, axis=1)
-renfedata['days_to_trip'] = renfedata.apply(daystoTrip, axis=1)
 
 # Add column for to compute diff in days away from trip as of scrape date
 renfedata['days_to_trip'] = (renfedata['start_date'].dt.date - renfedata['insert_date'].dt.date).dt.days
+renfedata['days_to_trip'] = renfedata.apply(daystoTrip, axis=1)
 
 renfedata = renfedata.dropna()
 
