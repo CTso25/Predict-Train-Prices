@@ -19,9 +19,6 @@ from sklearn.preprocessing import OneHotEncoder
 
 renfedata = pd.read_csv("input/renfe.csv")
 
-# drop nan values to reduce processing time
-renfedata = renfedata.dropna()
-
 # add in population
 
 # check unique cities
@@ -263,6 +260,7 @@ renfedata['train_class'] = renfedata.apply(trainClasses, axis=1)
 renfedata['days_to_trip'] = (renfedata['start_date'].dt.date - renfedata['insert_date'].dt.date).dt.days
 renfedata['days_to_trip'] = renfedata.apply(daystoTrip, axis=1)
 
+# drop nan values to reduce processing time
 renfedata = renfedata.dropna()
 
 renfedata.to_csv("input/not_encoded_clean_data.csv")
