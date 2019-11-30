@@ -5,6 +5,8 @@ from sklearn.model_selection import train_test_split
 
 # read in data and drop unnamed, start/end date columns
 renfedata = pd.read_csv("input/cleaned_data.csv")
+
+#keeping sample data in here for easy processing/debugging --> to remove later
 renfedata = renfedata.sample(n=50000, random_state=1)
 
 renfedata = renfedata.drop(columns=['Unnamed: 0','start_date', 'end_date'], axis=1)
