@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 # read in data and drop unnamed, start/end date columns
 renfedata = pd.read_csv("input/cleaned_data.csv")
 
-#keeping sample data in here for easy processing/debugging --> to remove later
+# keeping sample data in here for easy processing/debugging --> to remove later
 renfedata = renfedata.sample(n=50000, random_state=1)
 
 renfedata = renfedata.drop(columns=['Unnamed: 0','start_date', 'end_date'], axis=1)
@@ -36,9 +36,9 @@ def prepare_data():
     X_test = X_test.drop(columns=['insert_date'], axis=1)
 
     # standardize X_train and X_test
-    # std_scaler = preprocessing.StandardScaler().fit(X_train)
-    # X_train_scaled = std_scaler.transform(X_train)
-    # X_test_scaled = std_scaler.transform(X_test)
+    std_scaler = preprocessing.StandardScaler().fit(X_train)
+    X_train_scaled = std_scaler.transform(X_train)
+    X_test_scaled = std_scaler.transform(X_test)
 
     return X_train, X_test, y_train, y_test
 
