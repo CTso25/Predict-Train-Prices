@@ -43,4 +43,8 @@ def prepare_data():
     return X_train_scaled, X_test_scaled, y_train, y_test
 
 
+# function to return all features in a list
+def get_features():
+    features = renfedata.drop(columns=['price', 'insert_date'], axis=1)
+    return list(features.columns)
 
