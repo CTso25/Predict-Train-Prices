@@ -11,7 +11,7 @@ renfedata = renfedata.sample(n=50000, random_state=1)
 
 renfedata = renfedata.drop(columns=['Unnamed: 0','start_date', 'end_date'], axis=1)
 
-# sort data by insert data ascending to get have records in chronologicaly order for train/test split
+# sort data by insert data ascending to get have records in chronological order for train/test split
 renfedata = renfedata.sort_values('insert_date')
 
 # function to return train, test splits of data for direct use in modeling
