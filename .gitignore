@@ -3,3 +3,4 @@ venv/
 .idea/
 .spyproject/
 .ipynb_checkpoints/
+__pycache__/
