@@ -48,3 +48,16 @@ def get_features():
     features = renfedata.drop(columns=['price', 'insert_date'], axis=1)
     return list(features.columns)
 
+
+# function to compute upper bound for response variable
+def get_upper_bounds(y, percent):
+    float_percent = percent/100
+    upper_bound = y + (y * 0.10)
+    return upper_bound
+
+
+# function to compute lower bound for response variable
+def get_lower_bounds(y, percent):
+    float_percent = percent/100
+    lower_bound = y - (y * 0.10)
+    return lower_bound
