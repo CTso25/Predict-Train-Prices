@@ -52,12 +52,12 @@ def get_features():
 # function to compute upper bound for response variable
 def get_upper_bounds(y, percent):
     float_percent = percent/100
-    upper_bound = y + (y * 0.10)
+    upper_bound = y + (y * float_percent)
     return upper_bound
 
 
 # function to compute lower bound for response variable
 def get_lower_bounds(y, percent):
     float_percent = percent/100
-    lower_bound = y - (y * 0.10)
+    lower_bound = y - (y * float_percent)
     return lower_bound
