@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 renfedata = pd.read_csv("input/cleaned_data.csv")
 
 # keeping sample data in here for easy processing/debugging --> to remove later
-renfedata = renfedata.sample(n=50000)
+renfedata = renfedata.sample(n=100000)
 
 renfedata = renfedata.drop(columns=['Unnamed: 0','start_date', 'end_date'], axis=1)
 
@@ -21,7 +21,7 @@ def prepare_data():
     response = renfedata[['price']]
 
     # split data into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(features, response, train_size=0.75, shuffle=False)
+    X_train, X_test, y_train, y_test = train_test_split(features, response, train_size=0.80, shuffle=False)
 
     # verify that training and testing are separated in time correctly
     print('Train data(range):')
