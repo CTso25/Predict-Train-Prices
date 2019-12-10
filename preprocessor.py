@@ -9,7 +9,10 @@ renfedata = pd.read_csv("input/cleaned_data.csv")
 # keeping sample data in here for easy processing/debugging --> to remove later
 renfedata = renfedata.sample(n=100000, random_state=1)
 
-renfedata = renfedata.drop(columns=['Unnamed: 0','start_date', 'end_date'], axis=1)
+# drop irrelevant columns as well as those features determined not needed by feature selection procedures
+renfedata = renfedata.drop(columns=['Unnamed: 0','start_date', 'end_date', 'train_class_Cama G. Clase',
+                                    'fare_Individual Sleeper-Flexible', 'destination_MADRID',
+                                    'origin_MADRID', 'fare_Adulto Ida'], axis=1)
 
 # sort data by insert data ascending to get have records in chronological order for train/test split
 renfedata = renfedata.sort_values('insert_date')
@@ -70,3 +73,5 @@ def get_interval_accuracy_score(lower, upper, y):
             preds_acc.append(1)
         else:
             preds_acc.append(0)
+
+    return preds_acc
