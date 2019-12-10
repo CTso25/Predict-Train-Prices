@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 renfedata = pd.read_csv("input/cleaned_data.csv")
 
 # keeping sample data in here for easy processing/debugging --> to remove later
-renfedata = renfedata.sample(n=100000, random_state=1)
+renfedata = renfedata.sample(n=100000, random_state=0)
 
 # create the original renfe dataframe cleaned without engineered features (i.e - days to, populations)
 original_renfe_df = renfedata[['insert_date', 'price', 'month', 'date', 'hour', 'minute', 'origin_BARCELONA',
@@ -27,7 +27,7 @@ original_renfe_df = renfedata[['insert_date', 'price', 'month', 'date', 'hour', 
                                'train_class_Turista con enlace']]
 
 # sort data by insert data ascending to get have records in chronological order for train/test split
-original_renfe_df = original_renfe_df.sort_values('insert_date')
+# original_renfe_df = original_renfe_df.sort_values('insert_date')
 
 def prepare_data():
     # Define explanatory variables (features) and response variable (price)

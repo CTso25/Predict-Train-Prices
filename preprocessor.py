@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 renfedata = pd.read_csv("input/cleaned_data.csv")
 
 # keeping sample data in here for easy processing/debugging --> to remove later
-renfedata = renfedata.sample(n=100000, random_state=1)
+renfedata = renfedata.sample(n=100000, random_state=0)
 
 # drop irrelevant columns as well as those features determined not needed by feature selection procedures
 renfedata = renfedata.drop(columns=['Unnamed: 0','start_date', 'end_date', 'train_class_Cama G. Clase',
@@ -15,7 +15,7 @@ renfedata = renfedata.drop(columns=['Unnamed: 0','start_date', 'end_date', 'trai
                                     'origin_MADRID', 'fare_Adulto Ida'], axis=1)
 
 # sort data by insert data ascending to get have records in chronological order for train/test split
-renfedata = renfedata.sort_values('insert_date')
+# renfedata = renfedata.sort_values('insert_date')
 
 # function to return train, test splits of data for direct use in modeling
 def prepare_data():
