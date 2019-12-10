@@ -63,25 +63,35 @@ def get_features():
 
 
 # function to compute upper bound for response variable
-def get_upper_bounds(y, percent):
-    float_percent = percent/100
-    upper_bound = y + (y * float_percent)
-    return upper_bound
+# def get_upper_bounds(y, percent):
+#     float_percent = percent/100
+#     upper_bound = y + (y * float_percent)
+#     return upper_bound
 
 
 # function to compute lower bound for response variable
-def get_lower_bounds(y, percent):
+# def get_lower_bounds(y, percent):
+#     float_percent = percent/100
+#     lower_bound = y - (y * float_percent)
+#     return lower_bound
+
+def get_bounds(y, percent):
     float_percent = percent/100
+    upper_bound = y + (y * float_percent)
     lower_bound = y - (y * float_percent)
-    return lower_bound
+    lower_bound.columns = ['lower_bound']
+    upper_bound.columns = ['upper_bound']
+    bounds = lower_bound.join(upper_bound)
+    return bounds
 
 # function to compute accuracy scores for predictions based on actual upper/lower bound limits
-def get_interval_accuracy_score(lower, upper, y):
+def get_interval_accuracy_score(bounds, y):
     preds_acc = []
     for i in range(len(y)):
-        if (lower.iloc[i].price <= y[i] <= upper.iloc[i].price):
+        if (bounds.iloc[i].lower_bound <= y[i] <= bounds.iloc[i].upper_bound):
             preds_acc.append(1)
         else:
             preds_acc.append(0)
+    return np.mean(preds_acc)
 
 
