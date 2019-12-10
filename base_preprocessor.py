@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 renfedata = pd.read_csv("input/cleaned_data.csv")
 
 # keeping sample data in here for easy processing/debugging --> to remove later
-renfedata = renfedata.sample(n=100000)
+renfedata = renfedata.sample(n=100000, random_state=1)
 
 # create the original renfe dataframe cleaned without engineered features (i.e - days to, populations)
 original_renfe_df = renfedata[['insert_date', 'price', 'month', 'date', 'hour', 'minute', 'origin_BARCELONA',
@@ -53,10 +53,6 @@ def prepare_data():
     minMax_scaler = preprocessing.MinMaxScaler().fit(X_train)
     X_train_scaled = minMax_scaler.transform(X_train)
     X_test_scaled = minMax_scaler.transform(X_test)
-
-    # std_scaler = preprocessing.StandardScaler().fit(X_train)
-    # X_train_scaled = std_scaler.transform(X_train)
-    # X_test_scaled = std_scaler.transform(X_test)
 
     return X_train_scaled, X_test_scaled, y_train, y_test
 

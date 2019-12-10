@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 renfedata = pd.read_csv("input/cleaned_data.csv")
 
 # keeping sample data in here for easy processing/debugging --> to remove later
-renfedata = renfedata.sample(n=100000)
+renfedata = renfedata.sample(n=100000, random_state=1)
 
 renfedata = renfedata.drop(columns=['Unnamed: 0','start_date', 'end_date'], axis=1)
 
@@ -39,10 +39,6 @@ def prepare_data():
     minMax_scaler = preprocessing.MinMaxScaler().fit(X_train)
     X_train_scaled = minMax_scaler.transform(X_train)
     X_test_scaled = minMax_scaler.transform(X_test)
-
-    # std_scaler = preprocessing.StandardScaler().fit(X_train)
-    # X_train_scaled = std_scaler.transform(X_train)
-    # X_test_scaled = std_scaler.transform(X_test)
 
     return X_train_scaled, X_test_scaled, y_train, y_test
 
