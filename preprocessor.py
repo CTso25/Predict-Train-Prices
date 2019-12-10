@@ -61,3 +61,12 @@ def get_lower_bounds(y, percent):
     float_percent = percent/100
     lower_bound = y - (y * float_percent)
     return lower_bound
+
+# function to compute accuracy scores for predictions based on actual upper/lower bound limits
+def get_interval_accuracy_score(lower, upper, y):
+    preds_acc = []
+    for i in range(len(y)):
+        if (lower.iloc[i].price <= y[i] <= upper.iloc[i].price):
+            preds_acc.append(1)
+        else:
+            preds_acc.append(0)
