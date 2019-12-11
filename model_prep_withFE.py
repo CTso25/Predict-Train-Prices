@@ -1,21 +1,18 @@
 import pandas as pd
 import numpy as np
-from sklearn import linear_model as lin_model, preprocessing
+from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 
-# read in data and drop unnamed, start/end date columns
+# read in data that was engineered and preprocessed
 renfedata = pd.read_csv("input/cleaned_data.csv")
 
-# keeping sample data in here for easy processing/debugging --> to remove later
+# sample data for easy of modeling and quicker training
 renfedata = renfedata.sample(n=100000, random_state=0)
 
 # drop irrelevant columns as well as those features determined not needed by feature selection procedures
 renfedata = renfedata.drop(columns=['Unnamed: 0','start_date', 'end_date', 'train_class_Cama G. Clase',
                                     'fare_Individual Sleeper-Flexible', 'destination_MADRID',
                                     'origin_MADRID', 'fare_Adulto Ida'], axis=1)
-
-# sort data by insert data ascending to get have records in chronological order for train/test split
-# renfedata = renfedata.sort_values('insert_date')
 
 # function to return train, test splits of data for direct use in modeling
 def prepare_data():
@@ -24,9 +21,9 @@ def prepare_data():
     response = renfedata[['price']]
 
     # split data into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(features, response, train_size=0.80, shuffle=False)
+    X_train, X_test, y_train, y_test = train_test_split(features, response, train_size=0.80)
 
-    # verify that training and testing are separated in time correctly
+    # verify that training and testing are separated and their ranges
     print('Train data(range):')
     print(X_train['insert_date'].min())
     print(X_train['insert_date'].max())
@@ -34,7 +31,7 @@ def prepare_data():
     print(X_test['insert_date'].min())
     print(X_test['insert_date'].max())
 
-    # remove time stamps once data has been split correctly
+    # remove time stamps
     X_train = X_train.drop(columns=['insert_date'], axis=1)
     X_test = X_test.drop(columns=['insert_date'], axis=1)
 
@@ -45,26 +42,12 @@ def prepare_data():
 
     return X_train_scaled, X_test_scaled, y_train, y_test
 
-
 # function to return all features in a list
 def get_features():
     features = renfedata.drop(columns=['price', 'insert_date'], axis=1)
     return list(features.columns)
 
-
-# # function to compute upper bound for response variable
-# def get_upper_bounds(y, percent):
-#     float_percent = percent/100
-#     upper_bound = y + (y * float_percent)
-#     return upper_bound
-#
-#
-# # function to compute lower bound for response variable
-# def get_lower_bounds(y, percent):
-#     float_percent = percent/100
-#     lower_bound = y - (y * float_percent)
-#     return lower_bound
-
+# function to get upper and lower bounds of the response variable values based on given percent
 def get_bounds(y, percent):
     float_percent = percent/100
     upper_bound = y + (y * float_percent)
