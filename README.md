@@ -13,9 +13,9 @@ and clean data (handle missing and incorrect data)_
 
 __Model Preparation & Train/Test Splits__
 
-model_prep_withFE.py is used to load in feature engineered + reduced dataset for use in models 
+model_prep_withFE.py is used to load in feature engineered + reduced dataset 
 
-model_prep_withoutFE.py is used to load in data set without feature engineering
+model_prep_withoutFE.py is used to load in data set without feature engineering 
 
 __Models__
 
